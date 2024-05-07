@@ -1,2 +1,3 @@
-# Job_Salary_Prediction
-Predict job salaries based on job descriptions, education, and other relevant factors.
+# Salary Prediction API
+
+This project provides a RESTful API for predicting salaries based on various factors such as education level, years of experience, location, job title, age, and gender. The API utilizes a Random Forest regression model trained on a dataset containing historical salary data. Users can send POST requests to the /predict_salary endpoint with the relevant parameters, and the API will return salary predictions based on the provided inputs. The Random Forest model was trained using the R programming language and leverages the Plumber package for creating the API. Additionally, the project includes code for model training, evaluation, saving, and deployment, ensuring seamless integration into existing applications or workflows. Whether for HR departments, recruitment agencies, or individuals seeking salary insights, this API offers a convenient and efficient solution for salary prediction tasks.
