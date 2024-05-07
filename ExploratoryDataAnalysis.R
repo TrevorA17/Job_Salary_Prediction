@@ -151,3 +151,19 @@ print(summary(anova_result))
 anova_result <- aov(Salary ~ Job_Title, data = salary_data)
 print("ANOVA for Salary across different levels of Job_Title:")
 print(summary(anova_result))
+
+# Univariate Plots
+# Histogram for Age
+hist(salary_data$Age, main = "Histogram of Age", xlab = "Age")
+
+# Boxplot for Experience
+boxplot(salary_data$Experience, main = "Boxplot of Experience", ylab = "Experience")
+
+# Density plot for Salary
+plot(density(salary_data$Salary), main = "Density Plot of Salary", xlab = "Salary", ylab = "Density")
+
+# Barplot for Education
+barplot(table(salary_data$Education), main = "Barplot of Education", xlab = "Education", ylab = "Frequency")
+
+# Pie chart for Gender
+pie(table(salary_data$Gender), main = "Pie Chart of Gender")
