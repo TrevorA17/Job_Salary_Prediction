@@ -102,3 +102,20 @@ gbm_model <- gbm(Salary ~ ., data = salary_data, distribution = "gaussian", n.tr
 
 # Print the summary of the trained model
 print(gbm_model)
+
+# Define training control with repeated cross-validation
+train_control <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+
+# Define models to compare
+models <- list(
+  linear = train(Salary ~ ., data = salary_data, method = "lm", trControl = train_control),
+  decision_tree = train(Salary ~ ., data = salary_data, method = "rpart", trControl = train_control),
+  random_forest = train(Salary ~ ., data = salary_data, method = "rf", trControl = train_control),
+  gbm = train(Salary ~ ., data = salary_data, method = "gbm", trControl = train_control)
+)
+
+# Compare model performance using resamples
+model_comparison <- resamples(models)
+
+# Summarize the model comparison results
+summary(model_comparison)
