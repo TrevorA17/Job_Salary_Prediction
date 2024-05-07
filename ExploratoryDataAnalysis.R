@@ -125,3 +125,14 @@ print(age_quartiles)
 salary_quartiles <- quantile(salary_data$Salary, probs = c(0.25, 0.5, 0.75))
 print("Quartiles for Salary:")
 print(salary_quartiles)
+
+# Measures of Relationship
+# Correlation between Age and Salary
+age_salary_correlation <- cor(salary_data$Age, salary_data$Salary)
+print("Correlation between Age and Salary:")
+print(age_salary_correlation)
+
+# Covariance between Experience and Salary
+experience_salary_covariance <- cov(salary_data$Experience, salary_data$Salary)
+print("Covariance between Experience and Salary:")
+print(experience_salary_covariance)
