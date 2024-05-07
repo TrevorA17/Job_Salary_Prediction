@@ -65,3 +65,63 @@ print("Measures of central tendency for Salary:")
 print(paste("Mean:", salary_mean))
 print(paste("Median:", salary_median))
 
+# Measures of Distribution
+# Range for Experience
+experience_range <- range(salary_data$Experience)
+print("Range for Experience:")
+print(experience_range)
+
+# Range for Age
+age_range <- range(salary_data$Age)
+print("Range for Age:")
+print(age_range)
+
+# Range for Salary
+salary_range <- range(salary_data$Salary)
+print("Range for Salary:")
+print(salary_range)
+
+# Variance for Experience
+experience_variance <- var(salary_data$Experience)
+print("Variance for Experience:")
+print(experience_variance)
+
+# Variance for Age
+age_variance <- var(salary_data$Age)
+print("Variance for Age:")
+print(age_variance)
+
+# Variance for Salary
+salary_variance <- var(salary_data$Salary)
+print("Variance for Salary:")
+print(salary_variance)
+
+# Standard Deviation for Experience
+experience_sd <- sd(salary_data$Experience)
+print("Standard Deviation for Experience:")
+print(experience_sd)
+
+# Standard Deviation for Age
+age_sd <- sd(salary_data$Age)
+print("Standard Deviation for Age:")
+print(age_sd)
+
+# Standard Deviation for Salary
+salary_sd <- sd(salary_data$Salary)
+print("Standard Deviation for Salary:")
+print(salary_sd)
+
+# Quartiles for Experience
+experience_quartiles <- quantile(salary_data$Experience, probs = c(0.25, 0.5, 0.75))
+print("Quartiles for Experience:")
+print(experience_quartiles)
+
+# Quartiles for Age
+age_quartiles <- quantile(salary_data$Age, probs = c(0.25, 0.5, 0.75))
+print("Quartiles for Age:")
+print(age_quartiles)
+
+# Quartiles for Salary
+salary_quartiles <- quantile(salary_data$Salary, probs = c(0.25, 0.5, 0.75))
+print("Quartiles for Salary:")
+print(salary_quartiles)
