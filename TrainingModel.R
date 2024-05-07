@@ -34,3 +34,38 @@ print("Dimensions of Training Set:")
 print(dim(train_data))
 print("Dimensions of Testing Set:")
 print(dim(test_data))
+
+# Load required library
+library(boot)
+
+# Define the function to calculate the statistic of interest (e.g., mean)
+statistic_function <- function(data, indices) {
+  sampled_data <- data[indices, ]
+  # Here, you can compute any statistic you're interested in
+  # For example, let's compute the mean of Salary
+  mean_salary <- mean(sampled_data$Salary)
+  return(mean_salary)
+}
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Perform bootstrapping
+bootstrap_results <- boot(data = salary_data, statistic = statistic_function, R = 1000)
+
+# Print the bootstrapped confidence interval
+print(boot.ci(bootstrap_results, type = "basic"))
+
+#Cross-Validation
+# Set seed for reproducibility
+set.seed(123)
+
+# Define training control
+train_control <- trainControl(method = "cv", number = 10)  # 10-fold cross-validation
+
+# Train the model using cross-validation
+# Here, you can replace 'lm' with any other modeling function (e.g., 'glm', 'randomForest')
+model <- train(Salary ~ ., data = salary_data, method = "lm", trControl = train_control)
+
+# Print the cross-validation results
+print(summary(model))
