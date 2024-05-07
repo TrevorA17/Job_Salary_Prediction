@@ -167,3 +167,23 @@ barplot(table(salary_data$Education), main = "Barplot of Education", xlab = "Edu
 
 # Pie chart for Gender
 pie(table(salary_data$Gender), main = "Pie Chart of Gender")
+
+# Load required libraries
+library(ggplot2)
+
+# Multivariate Plots
+# Scatter plot of Salary vs. Age
+ggplot(salary_data, aes(x = Age, y = Salary)) +
+  geom_point() +
+  labs(title = "Scatter Plot of Salary vs. Age", x = "Age", y = "Salary")
+
+# Pair plot of Age, Experience, and Salary
+pairs(~ Age + Experience + Salary, data = salary_data,
+      main = "Pair Plot of Age, Experience, and Salary")
+
+# Heatmap of correlation matrix
+correlation_matrix <- cor(salary_data[c("Experience", "Age", "Salary")])
+heatmap(correlation_matrix, 
+        Colv = NA, Rowv = NA,
+        main = "Heatmap of Correlation Matrix",
+        xlab = "Variables", ylab = "Variables")
