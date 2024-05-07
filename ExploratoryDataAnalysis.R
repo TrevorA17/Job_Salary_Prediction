@@ -38,3 +38,30 @@ print(job_title_freq)
 gender_summary <- summary(salary_data$Gender)
 print("Summary of Gender:")
 print(gender_summary)
+
+# Measures of Central Tendency
+# Mean, Median, Mode for Experience
+experience_mean <- mean(salary_data$Experience)
+experience_median <- median(salary_data$Experience)
+experience_mode <- as.numeric(names(sort(table(salary_data$Experience), decreasing = TRUE)[1]))
+print("Measures of central tendency for Experience:")
+print(paste("Mean:", experience_mean))
+print(paste("Median:", experience_median))
+print(paste("Mode:", experience_mode))
+
+# Mean, Median, Mode for Age
+age_mean <- mean(salary_data$Age)
+age_median <- median(salary_data$Age)
+age_mode <- as.numeric(names(sort(table(salary_data$Age), decreasing = TRUE)[1]))
+print("Measures of central tendency for Age:")
+print(paste("Mean:", age_mean))
+print(paste("Median:", age_median))
+print(paste("Mode:", age_mode))
+
+# Mean, Median for Salary
+salary_mean <- mean(salary_data$Salary)
+salary_median <- median(salary_data$Salary)
+print("Measures of central tendency for Salary:")
+print(paste("Mean:", salary_mean))
+print(paste("Median:", salary_median))
+
