@@ -25,3 +25,8 @@ if (missing_values) {
 } else {
   print("No missing values are present in the dataset.")
 }
+# Round off Salary to 2 decimal places
+salary_data$Salary <- round(salary_data$Salary, 2)
+
+# View the first few rows of the updated dataset
+head(salary_data)
