@@ -136,3 +136,18 @@ print(age_salary_correlation)
 experience_salary_covariance <- cov(salary_data$Experience, salary_data$Salary)
 print("Covariance between Experience and Salary:")
 print(experience_salary_covariance)
+
+# ANOVA for Salary across different levels of Education
+anova_result <- aov(Salary ~ Education, data = salary_data)
+print("ANOVA for Salary across different levels of Education:")
+print(summary(anova_result))
+
+# ANOVA for Salary across different levels of Location
+anova_result <- aov(Salary ~ Location, data = salary_data)
+print("ANOVA for Salary across different levels of Location:")
+print(summary(anova_result))
+
+# ANOVA for Salary across different levels of Job_Title
+anova_result <- aov(Salary ~ Job_Title, data = salary_data)
+print("ANOVA for Salary across different levels of Job_Title:")
+print(summary(anova_result))
