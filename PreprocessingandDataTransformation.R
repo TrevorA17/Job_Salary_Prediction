@@ -17,3 +17,11 @@ head(salary_data)
 
 # View the dataset in a separate viewer window
 View(salary_data)
+
+# Check for missing values
+missing_values <- anyNA(salary_data)
+if (missing_values) {
+  print("Missing values are present in the dataset.")
+} else {
+  print("No missing values are present in the dataset.")
+}
