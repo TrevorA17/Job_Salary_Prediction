@@ -69,3 +69,36 @@ model <- train(Salary ~ ., data = salary_data, method = "lm", trControl = train_
 
 # Print the cross-validation results
 print(summary(model))
+
+# Train a linear regression model
+lm_model <- lm(Salary ~ ., data = salary_data)
+
+# Print the summary of the trained model
+summary(lm_model)
+
+# Load required library
+library(rpart)
+
+# Train a decision tree model
+tree_model <- rpart(Salary ~ ., data = salary_data)
+
+# Print the summary of the trained model
+print(tree_model)
+
+# Load required library
+library(randomForest)
+
+# Train a random forest model
+rf_model <- randomForest(Salary ~ ., data = salary_data)
+
+# Print the summary of the trained model
+print(rf_model)
+
+# Load required library
+library(gbm)
+
+# Train a GBM model
+gbm_model <- gbm(Salary ~ ., data = salary_data, distribution = "gaussian", n.trees = 100, interaction.depth = 4)
+
+# Print the summary of the trained model
+print(gbm_model)
