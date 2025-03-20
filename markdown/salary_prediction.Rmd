@@ -1,0 +1,398 @@
+---
+title: "Job Salary Prediction"
+author: "Trevor Okinda"
+date: "2024"
+output:
+  github_document: 
+    toc: yes
+    toc_depth: 4
+    fig_width: 6
+    fig_height: 4
+    df_print: default
+editor_options:
+  chunk_output_type: console
+---
+
+# Student Details
+
+|                                              |     |
+|----------------------------------------------|-----|
+| **Student ID Number**                        | 134780 |
+| **Student Name**                             | Trevor Okinda |
+| **BBIT 4.2 Group**                           | C |
+| **Project Name**                             | Job Salary Prediction |
+
+# Setup Chunk
+
+**Note:** the following KnitR options have been set as the global defaults: <BR> `knitr::opts_chunk$set(echo = TRUE, warning = FALSE, eval = TRUE, collapse = FALSE, tidy = TRUE)`.
+
+More KnitR options are documented here <https://bookdown.org/yihui/rmarkdown-cookbook/chunk-options.html> and here <https://yihui.org/knitr/options/>.
+
+```{r setup, include=FALSE}
+library(formatR)
+knitr::opts_chunk$set(
+  warning = FALSE,
+  collapse = FALSE
+)
+```
+
+# Understanding the Dataset (Exploratory Data Analysis (EDA))
+
+## Loading the Dataset
+
+### Source: 
+
+The dataset that was used can be downloaded here: *\<https://www.kaggle.com/datasets/mrsimple07/salary-prediction-data\>*
+
+### Reference:
+
+*\<MrSimple. (2023). Salary Prediction Data [Dataset]. Kaggle. Retrieved from https://www.kaggle.com/datasets/mrsimple07/salary-prediction-data/\>\
+Refer to the APA 7th edition manual for rules on how to cite datasets: <https://apastyle.apa.org/style-grammar-guidelines/references/examples/data-set-references>*
+
+# Exploratory Data Analysis
+## Load dataset
+```{r Load dataset}
+# Load dataset
+salary_data <- read.csv("salary_prediction_data.csv", colClasses = c(
+  Education = "factor",
+  Experience = "integer",
+  Location = "factor",
+  Job_Title = "factor",
+  Age = "integer",
+  Gender = "factor",
+  Salary = "numeric"
+))
+
+# Display the structure of the dataset
+str(salary_data)
+
+# View the first few rows of the dataset
+head(salary_data)
+
+# View the dataset in a separate viewer window
+View(salary_data)
+```
+
+## Measures of frequency
+```{r Measures of frequency}
+# Measures of Frequency
+# Frequency table for Education
+education_freq <- table(salary_data$Education)
+print("Frequency table for Education:")
+print(education_freq)
+
+# Frequency table for Location
+location_freq <- table(salary_data$Location)
+print("Frequency table for Location:")
+print(location_freq)
+
+# Frequency table for Job_Title
+job_title_freq <- table(salary_data$Job_Title)
+print("Frequency table for Job_Title:")
+print(job_title_freq)
+
+# Summary of Gender
+gender_summary <- summary(salary_data$Gender)
+print("Summary of Gender:")
+print(gender_summary)
+```
+
+## Measures of Central Tendency
+```{r measures of central tendency}
+# Measures of Central Tendency
+# Mean, Median, Mode for Experience
+experience_mean <- mean(salary_data$Experience)
+experience_median <- median(salary_data$Experience)
+experience_mode <- as.numeric(names(sort(table(salary_data$Experience), decreasing = TRUE)[1]))
+print("Measures of central tendency for Experience:")
+print(paste("Mean:", experience_mean))
+print(paste("Median:", experience_median))
+print(paste("Mode:", experience_mode))
+
+# Mean, Median, Mode for Age
+age_mean <- mean(salary_data$Age)
+age_median <- median(salary_data$Age)
+age_mode <- as.numeric(names(sort(table(salary_data$Age), decreasing = TRUE)[1]))
+print("Measures of central tendency for Age:")
+print(paste("Mean:", age_mean))
+print(paste("Median:", age_median))
+print(paste("Mode:", age_mode))
+
+# Mean, Median for Salary
+salary_mean <- mean(salary_data$Salary)
+salary_median <- median(salary_data$Salary)
+print("Measures of central tendency for Salary:")
+print(paste("Mean:", salary_mean))
+print(paste("Median:", salary_median))
+```
+
+## Measures of Distribution
+```{r measures of distribution}
+# Measures of Distribution
+# Range for Experience
+experience_range <- range(salary_data$Experience)
+print("Range for Experience:")
+print(experience_range)
+
+# Range for Age
+age_range <- range(salary_data$Age)
+print("Range for Age:")
+print(age_range)
+
+# Range for Salary
+salary_range <- range(salary_data$Salary)
+print("Range for Salary:")
+print(salary_range)
+
+# Variance for Experience
+experience_variance <- var(salary_data$Experience)
+print("Variance for Experience:")
+print(experience_variance)
+
+# Variance for Age
+age_variance <- var(salary_data$Age)
+print("Variance for Age:")
+print(age_variance)
+
+# Variance for Salary
+salary_variance <- var(salary_data$Salary)
+print("Variance for Salary:")
+print(salary_variance)
+
+# Standard Deviation for Experience
+experience_sd <- sd(salary_data$Experience)
+print("Standard Deviation for Experience:")
+print(experience_sd)
+
+# Standard Deviation for Age
+age_sd <- sd(salary_data$Age)
+print("Standard Deviation for Age:")
+print(age_sd)
+
+# Standard Deviation for Salary
+salary_sd <- sd(salary_data$Salary)
+print("Standard Deviation for Salary:")
+print(salary_sd)
+
+# Quartiles for Experience
+experience_quartiles <- quantile(salary_data$Experience, probs = c(0.25, 0.5, 0.75))
+print("Quartiles for Experience:")
+print(experience_quartiles)
+
+# Quartiles for Age
+age_quartiles <- quantile(salary_data$Age, probs = c(0.25, 0.5, 0.75))
+print("Quartiles for Age:")
+print(age_quartiles)
+
+# Quartiles for Salary
+salary_quartiles <- quantile(salary_data$Salary, probs = c(0.25, 0.5, 0.75))
+print("Quartiles for Salary:")
+print(salary_quartiles)
+```
+
+## Measures of Relationship
+```{r Measures of relationship}
+# Measures of Relationship
+# Correlation between Age and Salary
+age_salary_correlation <- cor(salary_data$Age, salary_data$Salary)
+print("Correlation between Age and Salary:")
+print(age_salary_correlation)
+
+# Covariance between Experience and Salary
+experience_salary_covariance <- cov(salary_data$Experience, salary_data$Salary)
+print("Covariance between Experience and Salary:")
+print(experience_salary_covariance)
+```
+
+## ANOVA
+```{r ANOVA}
+# ANOVA for Salary across different levels of Education
+anova_result <- aov(Salary ~ Education, data = salary_data)
+print("ANOVA for Salary across different levels of Education:")
+print(summary(anova_result))
+
+# ANOVA for Salary across different levels of Location
+anova_result <- aov(Salary ~ Location, data = salary_data)
+print("ANOVA for Salary across different levels of Location:")
+print(summary(anova_result))
+
+# ANOVA for Salary across different levels of Job_Title
+anova_result <- aov(Salary ~ Job_Title, data = salary_data)
+print("ANOVA for Salary across different levels of Job_Title:")
+print(summary(anova_result))
+```
+
+##Plots
+```{r}
+# Univariate Plots
+# Histogram for Age
+hist(salary_data$Age, main = "Histogram of Age", xlab = "Age")
+
+# Boxplot for Experience
+boxplot(salary_data$Experience, main = "Boxplot of Experience", ylab = "Experience")
+
+# Density plot for Salary
+plot(density(salary_data$Salary), main = "Density Plot of Salary", xlab = "Salary", ylab = "Density")
+
+# Barplot for Education
+barplot(table(salary_data$Education), main = "Barplot of Education", xlab = "Education", ylab = "Frequency")
+
+# Pie chart for Gender
+pie(table(salary_data$Gender), main = "Pie Chart of Gender")
+
+# Load required libraries
+library(ggplot2)
+
+# Multivariate Plots
+# Scatter plot of Salary vs. Age
+ggplot(salary_data, aes(x = Age, y = Salary)) +
+  geom_point() +
+  labs(title = "Scatter Plot of Salary vs. Age", x = "Age", y = "Salary")
+
+# Pair plot of Age, Experience, and Salary
+pairs(~ Age + Experience + Salary, data = salary_data,
+      main = "Pair Plot of Age, Experience, and Salary")
+
+# Heatmap of correlation matrix
+correlation_matrix <- cor(salary_data[c("Experience", "Age", "Salary")])
+heatmap(correlation_matrix, 
+        Colv = NA, Rowv = NA,
+        main = "Heatmap of Correlation Matrix",
+        xlab = "Variables", ylab = "Variables")
+```
+
+# Preprocessing and Data Transformation
+## Missing Values
+```{r preprocessing and data transformation}
+# Check for missing values
+missing_values <- anyNA(salary_data)
+if (missing_values) {
+  print("Missing values are present in the dataset.")
+} else {
+  print("No missing values are present in the dataset.")
+}
+# Round off Salary to 2 decimal places
+salary_data$Salary <- round(salary_data$Salary, 2)
+
+# View the first few rows of the updated dataset
+head(salary_data)
+```
+
+# Training Model
+## Data splitting
+```{r Data splitting}
+# Load required library
+library(caret)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Split data into training and testing sets
+train_index <- createDataPartition(salary_data$Salary, p = 0.8, list = FALSE)
+train_data <- salary_data[train_index, ]
+test_data <- salary_data[-train_index, ]
+
+# Display the dimensions of the training and testing sets
+print("Dimensions of Training Set:")
+print(dim(train_data))
+print("Dimensions of Testing Set:")
+print(dim(test_data))
+```
+
+## Bootstrapping
+```{r }
+# Load required library
+library(boot)
+
+# Define the function to calculate the statistic of interest (e.g., mean)
+statistic_function <- function(data, indices) {
+  sampled_data <- data[indices, ]
+  # Here, you can compute any statistic you're interested in
+  # For example, let's compute the mean of Salary
+  mean_salary <- mean(sampled_data$Salary)
+  return(mean_salary)
+}
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Perform bootstrapping
+bootstrap_results <- boot(data = salary_data, statistic = statistic_function, R = 1000)
+
+# Print the bootstrapped confidence interval
+print(boot.ci(bootstrap_results, type = "basic"))
+```
+
+## Cross-validation
+```{r}
+#Cross-Validation
+# Set seed for reproducibility
+set.seed(123)
+
+# Define training control
+train_control <- trainControl(method = "cv", number = 10)  # 10-fold cross-validation
+
+# Train the model using cross-validation
+# Here, you can replace 'lm' with any other modeling function (e.g., 'glm', 'randomForest')
+model <- train(Salary ~ ., data = salary_data, method = "lm", trControl = train_control)
+
+# Print the cross-validation results
+print(summary(model))
+```
+
+## Training Model
+```{r}
+# Train a linear regression model
+lm_model <- lm(Salary ~ ., data = salary_data)
+
+# Print the summary of the trained model
+summary(lm_model)
+
+# Load required library
+library(rpart)
+
+# Train a decision tree model
+tree_model <- rpart(Salary ~ ., data = salary_data)
+
+# Print the summary of the trained model
+print(tree_model)
+
+# Load required library
+library(randomForest)
+
+# Train a random forest model
+rf_model <- randomForest(Salary ~ ., data = salary_data)
+
+# Print the summary of the trained model
+print(rf_model)
+
+# Load required library
+library(gbm)
+
+# Train a GBM model
+gbm_model <- gbm(Salary ~ ., data = salary_data, distribution = "gaussian", n.trees = 100, interaction.depth = 4)
+
+# Print the summary of the trained model
+print(gbm_model)
+```
+
+## Performance comparison
+```{r}
+# Define training control with repeated cross-validation
+train_control <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+
+# Define models to compare
+models <- list(
+  linear = train(Salary ~ ., data = salary_data, method = "lm", trControl = train_control),
+  decision_tree = train(Salary ~ ., data = salary_data, method = "rpart", trControl = train_control),
+  random_forest = train(Salary ~ ., data = salary_data, method = "rf", trControl = train_control),
+  gbm = train(Salary ~ ., data = salary_data, method = "gbm", trControl = train_control)
+)
+
+# Compare model performance using resamples
+model_comparison <- resamples(models)
+
+# Summarize the model comparison results
+summary(model_comparison)
+```
+
